@@ -1,14 +1,2 @@
 linters:
   enable-all: true
-  disable:
-    - gci
-    - nlreturn
-    - goerr113
-    - exhaustivestruct
-    - lll
-    - typecheck
-    - goimports
-    - dupl
-    - interfacer
-    - wsl
-    - gochecknoglobals
