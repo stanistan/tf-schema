@@ -13,19 +13,19 @@ type Named struct {
 	schema *schema.Schema
 }
 
-// NewNamed creates a Named schema given any options
+// NewNamed creates a Named schema given any Options
 func NewNamed(name string, opts ...Option) *Named {
 	return (&Named{name, &schema.Schema{}}).Apply(opts...)
 }
 
-// Type is a constructor of NamedSchemaFactory given default options
+// Type is a constructor of NamedSchemaFactory given default Options
 func Type(defaultOpts ...Option) NamedSchemaFactory {
 	return func(name string, opts ...Option) *Named {
 		return NewNamed(name, defaultOpts...).Apply(opts...)
 	}
 }
 
-// Apply applies any options to the contained schema.Schema
+// Apply applies any Options to the contained schema.Schema
 func (s *Named) Apply(opts ...Option) *Named {
 	Options(opts...)(s.schema)
 	return s

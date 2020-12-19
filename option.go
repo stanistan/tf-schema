@@ -53,6 +53,7 @@ func List(s *schema.Schema) {
 	s.Type = schema.TypeList
 }
 
+// ListOf marks the schema to be a List of r.
 func ListOf(r interface{}) Option {
 	return Options(List, Elem(r))
 }
@@ -62,27 +63,9 @@ func Map(s *schema.Schema) {
 	s.Type = schema.TypeMap
 }
 
+// MapOf marks the schema to be a map of r.
 func MapOf(r interface{}) Option {
 	return Options(Map, Elem(r))
-}
-
-func toElemType(val interface{}) interface{} {
-	if val == nil {
-		return val
-	}
-	switch v := val.(type) {
-	case *schema.Resource:
-		return v
-	case *schema.Schema:
-		return v
-	case func(*schema.Schema):
-		var elemSchema schema.Schema
-		v(&elemSchema)
-		return &elemSchema
-	default:
-		// this will fail in TF itself
-		return v
-	}
 }
 
 // Elem creates an Option that sets the Elem field on the schema.
@@ -98,5 +81,26 @@ func Elem(r interface{}) Option {
 func Default(v interface{}) Option {
 	return func(s *schema.Schema) {
 		s.Default = v
+	}
+}
+
+func toElemType(val interface{}) interface{} {
+	if val == nil {
+		return val
+	}
+	switch v := val.(type) {
+	case *schema.Resource:
+		return v
+	case *schema.Schema:
+		return v
+	case *Schema:
+		return v.AsResource()
+	case func(*schema.Schema):
+		var elemSchema schema.Schema
+		v(&elemSchema)
+		return &elemSchema
+	default:
+		// this will fail in TF itself
+		return v
 	}
 }
