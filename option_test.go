@@ -33,8 +33,8 @@ func TestOption_MapOf(t *testing.T) {
 		Elem: &schema.Schema{Type: schema.TypeString},
 		Type: schema.TypeMap,
 	}
-	assertOption(t, expected, s.MapOf(s.String))
-	assertOption(t, expected, s.MapOf(&schema.Schema{Type: schema.TypeString}))
+	assertOption(t, expected, s.MapOf(s.String), "MapOf extracts correctly")
+	assertOption(t, expected, s.MapOf(&schema.Schema{Type: schema.TypeString}), "MapOf supports the raw helper/schema")
 }
 
 func assertOption(t *testing.T, expected *schema.Schema, opt s.Option, args ...interface{}) {

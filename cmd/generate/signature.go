@@ -15,6 +15,7 @@ var (
 
 func (s signatureType) WrapFn(ns string) string {
 	var suffix string
+
 	switch s {
 	case typedReturnSignature:
 		suffix = "typedReturn"
@@ -23,6 +24,7 @@ func (s signatureType) WrapFn(ns string) string {
 	case boolReturnSignature:
 		suffix = "boolReturn"
 	}
+
 	return fmt.Sprintf("_clientWrap_%s_%s", suffix, ns)
 }
 

@@ -18,37 +18,37 @@ func Options(opts ...Option) Option {
 	}
 }
 
-// Optional marks the scheam Optional
+// Optional marks the scheam Optional.
 func Optional(s *schema.Schema) {
 	s.Optional = true
 }
 
-// Required marks the schema Required
+// Required marks the schema Required.
 func Required(s *schema.Schema) {
 	s.Required = true
 }
 
-// Computed marks the schema Computed
+// Computed marks the schema Computed.
 func Computed(s *schema.Schema) {
 	s.Computed = true
 }
 
-// String marks the schema to be a String
+// String marks the schema to be a String.
 func String(s *schema.Schema) {
 	s.Type = schema.TypeString
 }
 
-// Bool marks the schema to be a Bool
+// Bool marks the schema to be a Bool.
 func Bool(s *schema.Schema) {
 	s.Type = schema.TypeBool
 }
 
-// Int marks the schema to be an Int
+// Int marks the schema to be an Int.
 func Int(s *schema.Schema) {
 	s.Type = schema.TypeInt
 }
 
-// List marks the schema to be a List
+// List marks the schema to be a List.
 func List(s *schema.Schema) {
 	s.Type = schema.TypeList
 }
@@ -58,7 +58,7 @@ func ListOf(r interface{}) Option {
 	return Options(List, Elem(r))
 }
 
-// Map marks the schema to be a Map
+// Map marks the schema to be a Map.
 func Map(s *schema.Schema) {
 	s.Type = schema.TypeMap
 }
@@ -77,7 +77,7 @@ func Elem(r interface{}) Option {
 	}
 }
 
-// Default creates an Option marks the schema's Default field
+// Default creates an Option marks the schema's Default field.
 func Default(v interface{}) Option {
 	return func(s *schema.Schema) {
 		s.Default = v
@@ -100,7 +100,6 @@ func toElemType(val interface{}) interface{} {
 		v(&elemSchema)
 		return &elemSchema
 	default:
-		// this will fail in TF itself
-		return v
+		return v // this will fail in TF itself
 	}
 }
