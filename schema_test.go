@@ -6,16 +6,17 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	s "github.com/stanistan/tf-schema"
 )
 
 func TestNamedSchema(t *testing.T) {
 
-	bar := ComputedString("bar")
-	ListOfBarResource := Type(ListOf(Resource(bar)))
-	s := Resource(
-		OptionalString("foo"),
-		RequiredBool("ring"),
-		ListOfBarResource("bars", Computed),
+	bar := s.ComputedString("bar")
+	ListOfBarResource := s.Type(s.ListOf(s.Resource(bar)))
+	s := s.Resource(
+		s.OptionalString("foo"),
+		s.RequiredBool("ring"),
+		ListOfBarResource("bars", s.Computed),
 	)
 
 	assert.Equal(t, map[string]*schema.Schema{
