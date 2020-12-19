@@ -33,7 +33,7 @@ type templateTypeDef struct {
 
 func (t *templateTypeDef) TFName() string {
 	name := t.n
-	return "tfschema." + strings.ToUpper(string(name[0])) + string(name[1:]) + "Func"
+	return "tfschema." + strings.ToUpper(string(name[0])) + name[1:] + "Func"
 }
 
 func (t *templateTypeDef) Name(ns string) string {

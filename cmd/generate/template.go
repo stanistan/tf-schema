@@ -41,7 +41,7 @@ type {{.NS}}Resource struct {
 	Schema *schema.Schema
 }
 
-// AsResource converts this to a tfschema.Resource
+// AsResource converts this to a tfschema.Resource.
 func (r *{{.NS}}Resource) AsResource() *tfschema.Resource {
 	return &tfschema.Resource{
 		{{.TypeDefs.Create.FieldAssignWrapFn $.NS}},
@@ -62,7 +62,7 @@ type {{.NS}}Provider struct {
 	ConfigureFunc 	{{.TypeDefs.Configure.Name $.NS}}
 }
 
-// AsProvider converts this to a tfschema.Provider
+// AsProvider converts this to a tfschema.Provider.
 func (p *{{.NS}}Provider) AsProvider() *tfschema.Provider {
 	var configure tfschema.ConfigureFunc
 	if p.ConfigureFunc != nil {
@@ -79,7 +79,10 @@ func (p *{{.NS}}Provider) AsProvider() *tfschema.Provider {
 	}
 }
 
-func {{.Signatures.singleReturn.WrapFn .NS}} (name string, exec func(*tfschema.ResourceData, *{{.Client}}) error) func(*tfschema.ResourceData, interface{}) error {
+func {{.Signatures.singleReturn.WrapFn .NS}} (
+	name string,
+	exec func(*tfschema.ResourceData, *{{.Client}}) error,
+) func(*tfschema.ResourceData, interface{}) error {
 	if exec == nil {
 		return nil
 	}
@@ -93,7 +96,10 @@ func {{.Signatures.singleReturn.WrapFn .NS}} (name string, exec func(*tfschema.R
 	}
 }
 
-func {{.Signatures.boolReturn.WrapFn .NS}} (name string, exec func(*tfschema.ResourceData, *{{.Client}}) (bool, error)) func(*tfschema.ResourceData, interface{}) (bool, error) {
+func {{.Signatures.boolReturn.WrapFn .NS}} (
+	name string,
+	exec func(*tfschema.ResourceData, *{{.Client}}) (bool, error),
+) func(*tfschema.ResourceData, interface{}) (bool, error) {
 	if exec == nil {
 		return nil
 	}

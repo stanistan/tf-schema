@@ -10,7 +10,6 @@ import (
 )
 
 func TestNamedSchema(t *testing.T) {
-
 	bar := s.ComputedString("bar")
 	ListOfBarResource := s.Type(s.ListOf(s.Resource(bar)))
 	s := s.Resource(
