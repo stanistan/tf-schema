@@ -18,54 +18,39 @@ func Options(opts ...Option) Option {
 	}
 }
 
-// Optional marks the scheam Optional.
+// Optional is an Option that marks the scheam Optional.
 func Optional(s *schema.Schema) {
 	s.Optional = true
 }
 
-// Required marks the schema Required.
+// Required is an Option that marks the schema Required.
 func Required(s *schema.Schema) {
 	s.Required = true
 }
 
-// Computed marks the schema Computed.
+// Computed is an Option that marks the schema Computed.
 func Computed(s *schema.Schema) {
 	s.Computed = true
 }
 
-// String marks the schema to be a String.
+// String is an Option that marks the schema to be a String.
 func String(s *schema.Schema) {
 	s.Type = schema.TypeString
 }
 
-// Bool marks the schema to be a Bool.
+// Bool is an Option that marks the schema to be a Bool.
 func Bool(s *schema.Schema) {
 	s.Type = schema.TypeBool
 }
 
-// Int marks the schema to be an Int.
+// Int is an Option that marks the schema to be an Int.
 func Int(s *schema.Schema) {
 	s.Type = schema.TypeInt
 }
 
-// List marks the schema to be a List.
+// List is an Option that marks the schema to be a List.
 func List(s *schema.Schema) {
 	s.Type = schema.TypeList
-}
-
-// ListOf marks the schema to be a List of r.
-func ListOf(r interface{}) Option {
-	return Options(List, Elem(r))
-}
-
-// Map marks the schema to be a Map.
-func Map(s *schema.Schema) {
-	s.Type = schema.TypeMap
-}
-
-// MapOf marks the schema to be a map of r.
-func MapOf(r interface{}) Option {
-	return Options(Map, Elem(r))
 }
 
 // Elem creates an Option that sets the Elem field on the schema.
@@ -82,6 +67,21 @@ func Default(v interface{}) Option {
 	return func(s *schema.Schema) {
 		s.Default = v
 	}
+}
+
+// ListOf is an Option that marks the schema to be a List of value.
+func ListOf(value interface{}) Option {
+	return Options(List, Elem(value))
+}
+
+// Map is an Option that marks the schema to be a Map.
+func Map(s *schema.Schema) {
+	s.Type = schema.TypeMap
+}
+
+// MapOf is an Option that marks the schema to be a map of value.
+func MapOf(value interface{}) Option {
+	return Options(Map, Elem(value))
 }
 
 func toElemType(val interface{}) interface{} {

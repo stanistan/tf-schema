@@ -3,10 +3,10 @@
 // It does this in a couple of ways.
 //
 // 1. By providing primitive combinators to make writing schemas/resources simpler,
-//    easier to read and write.
+// easier to read and write.
 //
 // 2. By providing a codegen tool so a provider can have its own typed resources,
-// 	  not relying on interface{}, but whatever userland type is desired.
+// not relying on interface{}, but whatever userland type is desired.
 //
 // These two features can be used separately or together.
 //
