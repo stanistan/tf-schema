@@ -15,6 +15,7 @@ var (
 
 func (s signatureType) WrapFn(ns string) string {
 	var suffix string
+
 	switch s {
 	case typedReturnSignature:
 		suffix = "typedReturn"
@@ -23,6 +24,7 @@ func (s signatureType) WrapFn(ns string) string {
 	case boolReturnSignature:
 		suffix = "boolReturn"
 	}
+
 	return fmt.Sprintf("_clientWrap_%s_%s", suffix, ns)
 }
 
@@ -33,7 +35,7 @@ type templateTypeDef struct {
 
 func (t *templateTypeDef) TFName() string {
 	name := t.n
-	return "tfschema." + strings.ToUpper(string(name[0])) + string(name[1:]) + "Func"
+	return "tfschema." + strings.ToUpper(string(name[0])) + name[1:] + "Func"
 }
 
 func (t *templateTypeDef) Name(ns string) string {

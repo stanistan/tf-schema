@@ -44,7 +44,7 @@ type importedPackage struct {
 
 func makeImportedPackage(name string, args []string) (*importedPackage, error) {
 	chunks := strings.Split(name, ".")
-	if len(chunks) > 2 {
+	if len(chunks) > 2 { //nolint: gomnd
 		return nil, errors.New("invalid client name provided " + name)
 	}
 

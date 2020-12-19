@@ -1,18 +1,21 @@
 package schema
 
+// These are pre-defined type constructors for Named.
+//
+// Use them like so:
+//
+//	Resource(
+// 		RequiredBool("bool_field_name")
+//	)
+//
 var (
-	// Required schemas
-	RequiredBool   = Type(Required, Bool)
-	RequiredInt    = Type(Required, Int)
-	RequiredString = Type(Required, String)
-
-	// Computed schemas
-	ComputedBool   = Type(Computed, Bool)
-	ComputedInt    = Type(Computed, Int)
-	ComputedString = Type(Computed, String)
-
-	// Optional schemas
-	OptionalBool   = Type(Optional, Bool)
-	OptionalInt    = Type(Optional, Int)
-	OptionalString = Type(Optional, String)
+	RequiredBool   NamedSchemaFactory = Type(Required, Bool)
+	RequiredInt                       = Type(Required, Int)
+	RequiredString                    = Type(Required, String)
+	ComputedBool                      = Type(Computed, Bool)
+	ComputedInt                       = Type(Computed, Int)
+	ComputedString                    = Type(Computed, String)
+	OptionalBool                      = Type(Optional, Bool)
+	OptionalInt                       = Type(Optional, Int)
+	OptionalString                    = Type(Optional, String)
 )

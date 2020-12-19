@@ -1,4 +1,4 @@
-package schema
+package schema_test
 
 import (
 	"testing"
@@ -6,14 +6,15 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	s "github.com/stanistan/tf-schema"
 )
 
 func TestOption_Optional(t *testing.T) {
-	assertOption(t, &schema.Schema{Optional: true}, Optional)
+	assertOption(t, &schema.Schema{Optional: true}, s.Optional)
 }
 
 func TestOption_Required(t *testing.T) {
-	assertOption(t, &schema.Schema{Required: true}, Required)
+	assertOption(t, &schema.Schema{Required: true}, s.Required)
 }
 
 func TestOption_ListOf(t *testing.T) {
@@ -23,8 +24,8 @@ func TestOption_ListOf(t *testing.T) {
 		},
 		Type: schema.TypeList,
 	}
-	assertOption(t, expected, ListOf(String))
-	assertOption(t, expected, ListOf(&schema.Schema{Type: schema.TypeString}))
+	assertOption(t, expected, s.ListOf(s.String))
+	assertOption(t, expected, s.ListOf(&schema.Schema{Type: schema.TypeString}))
 }
 
 func TestOption_MapOf(t *testing.T) {
@@ -32,11 +33,11 @@ func TestOption_MapOf(t *testing.T) {
 		Elem: &schema.Schema{Type: schema.TypeString},
 		Type: schema.TypeMap,
 	}
-	assertOption(t, expected, MapOf(String))
-	assertOption(t, expected, MapOf(&schema.Schema{Type: schema.TypeString}))
+	assertOption(t, expected, s.MapOf(s.String), "MapOf extracts correctly")
+	assertOption(t, expected, s.MapOf(&schema.Schema{Type: schema.TypeString}), "MapOf supports the raw helper/schema")
 }
 
-func assertOption(t *testing.T, expected *schema.Schema, opt Option, args ...interface{}) {
+func assertOption(t *testing.T, expected *schema.Schema, opt s.Option, args ...interface{}) {
 	t.Helper()
 	s := &schema.Schema{}
 	opt(s)

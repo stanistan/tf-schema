@@ -5,6 +5,11 @@ import (
 	"github.com/pkg/errors"
 )
 
+// Resource is an alias for Must.
+//
+// This may become the actual thing we call the package.
+var Resource = Must
+
 // Schema is a wrapper for the terraform map[string]*schema.Schema.
 //
 // This is similar to something you would use if you were creating
@@ -20,7 +25,7 @@ func (s *Schema) AsResource() *schema.Resource {
 	}
 }
 
-// New creates a Schema given any MapMutators and applies them
+// New creates a Schema given any MapMutators and applies them.
 func New(fs ...MapMutator) (*Schema, error) {
 	schema := &Schema{map[string]*schema.Schema{}}
 	return schema.Push(fs...)
@@ -34,9 +39,6 @@ func Must(fs ...MapMutator) *Schema {
 	}
 	return s
 }
-
-// Resource is an alias for Must
-var Resource = Must
 
 // Push adds any MapMutators to a Schema.
 func (s *Schema) Push(fs ...MapMutator) (*Schema, error) {
