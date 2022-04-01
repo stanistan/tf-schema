@@ -5,7 +5,7 @@ A libary to help trim down the verbosity of writing TF providers.
 - Generates a typed `Resource` and `Provider` for your plugin
 - Provides combinators for declarative and terse schema
 
-_Note_: This is currently only compatible with V1 providers.
+If you want to use v2 Providers, you can use `tf-schema/v2`!
 
 ## Usage: Codegen & Setup
 
@@ -32,13 +32,13 @@ import (
 _This is mandatory to generate the types to interact with the client._
 
 ```go
-//go:generate go run -mod readonly github.com/stanistan/tf-schema/cmd/generate lib.Client some/url/package/lib
+//go:generate go run -mod readonly github.com/stanistan/tf-schema/v2/cmd/generate lib.Client some/url/package/lib
 ```
 
 #### Provider
 
 ```go
-func Provider() terraform.ResourceProvider {
+func Provider() *tfschema.Provider {
 	// libProvider is a generated struct private to your code
 	return (&libProvider{
 		Schema: schema.Must(
@@ -99,7 +99,7 @@ For example:
 
 ```go
 // import (
-//	schema "github.com/stanistan/tf-schema"
+//	schema "github.com/stanistan/tf-schema/v2"
 //)
 
 // This is how schema.OptionalString is defined.
