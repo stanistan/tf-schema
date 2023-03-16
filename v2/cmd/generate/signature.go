@@ -8,9 +8,8 @@ import (
 type signatureType string
 
 var (
-	typedReturnSignature  signatureType = "func(*tfschema.ResourceData) (*%s, error)"
-	singleReturnSignature signatureType = "func(*tfschema.ResourceData, *%s) error"
-	boolReturnSignature   signatureType = "func(*tfschema.ResourceData, *%s) (bool, error)"
+	typedReturnSignature  signatureType = "func(context.Context, *tfschema.ResourceData) (*%s, diag.Diagnostics)"
+	singleReturnSignature signatureType = "func(context.Context, *tfschema.ResourceData, *%s) diag.Diagnostics"
 )
 
 func (s signatureType) WrapFn(ns string) string {
@@ -21,8 +20,6 @@ func (s signatureType) WrapFn(ns string) string {
 		suffix = "typedReturn"
 	case singleReturnSignature:
 		suffix = "singleReturn"
-	case boolReturnSignature:
-		suffix = "boolReturn"
 	}
 
 	return fmt.Sprintf("_clientWrap_%s_%s", suffix, ns)

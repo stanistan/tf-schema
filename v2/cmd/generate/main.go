@@ -50,17 +50,15 @@ func main() {
 		Args:        os.Args[1:],
 		Package:     os.Getenv("GOPACKAGE"),
 		TypeDefs: map[string]*templateTypeDef{
-			"Configure": {"Configure", typedReturnSignature},
-			"Create":    {"Create", singleReturnSignature},
-			"Read":      {"Read", singleReturnSignature},
-			"Delete":    {"Delete", singleReturnSignature},
-			"Update":    {"Update", singleReturnSignature},
-			"Exists":    {"Exists", boolReturnSignature},
+			"Configure": {"ConfigureContext", typedReturnSignature},
+			"Create":    {"CreateContext", singleReturnSignature},
+			"Read":      {"ReadContext", singleReturnSignature},
+			"Delete":    {"DeleteContext", singleReturnSignature},
+			"Update":    {"UpdateContext", singleReturnSignature},
 		},
 		Signatures: map[string]signatureType{
 			"singleReturn": singleReturnSignature,
 			"typedReturn":  typedReturnSignature,
-			"boolReturn":   boolReturnSignature,
 		},
 	}))
 
